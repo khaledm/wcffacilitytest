@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Dispatcher;
+using System.Xml.Linq;
 
 namespace WindsorWcfIntegration
 {
@@ -23,6 +24,7 @@ namespace WindsorWcfIntegration
 
         public object BeforeCall(string operationName, object[] inputs)
         {
+            XElement input = (XElement)inputs[0];
             return DateTime.Now;
         }
     }

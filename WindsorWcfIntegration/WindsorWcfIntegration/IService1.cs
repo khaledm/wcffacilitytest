@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Xml.Linq;
 
 namespace WindsorWcfIntegration
 {
@@ -14,7 +15,15 @@ namespace WindsorWcfIntegration
     {
 
         [OperationContract]
+        [WebGet]
         string GetData(int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", 
+            ResponseFormat = WebMessageFormat.Xml,
+            RequestFormat = WebMessageFormat.Xml,
+    BodyStyle = WebMessageBodyStyle.Bare)]
+        string PostData(XElement xml);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Logging;
 using System;
+using System.Xml.Linq;
 
 namespace WindsorWcfIntegration
 {
@@ -29,6 +30,12 @@ namespace WindsorWcfIntegration
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public string PostData(XElement xml)
+        {
+            var xdoc = new XDocument(xml);
+            return xdoc.ToString();
         }
     }
 }

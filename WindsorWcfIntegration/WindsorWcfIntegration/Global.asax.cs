@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using Castle.Facilities.Logging;
 using Castle.Facilities.WcfIntegration;
+using Castle.Facilities.WcfIntegration.Rest;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.Log4netIntegration;
 using Castle.Windsor;
@@ -35,7 +36,7 @@ namespace WindsorWcfIntegration
                 Component.For<OperationProfilerManager>(),
                  Component.For<OperationProfilerEndpointBehavior>(),
                      Component.For<ICustomerService>()
-                     .ImplementedBy<CustomerService>());
+                     .ImplementedBy<CustomerService>().AsWcfService(new RestServiceModel().Hosted()));
             //.Named("customerservice"));
             
         }
