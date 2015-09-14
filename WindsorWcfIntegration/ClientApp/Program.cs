@@ -20,17 +20,17 @@ namespace ClientApp
     {
         static void Main(string[] args)
         {
-            //var container = GetContainer();
-            ///var reverser = container.Resolve<IDoSomethingWithCustomers>();
-            //reverser.DoIt();
-            //reverser.DoIt();
-            //reverser.DoSomeMore();
+            var container = GetContainer();
+            var reverser = container.Resolve<IDoSomethingWithCustomers>();
+            reverser.DoIt();
+            reverser.DoIt();
+            reverser.DoSomeMore();
 
-            ServiceReference1.CustomerServiceClient client =
-                new ServiceReference1.CustomerServiceClient(
-                    new WebHttpBinding(), 
-                    new EndpointAddress("http://localhost/WindsorWcfIntegration/Service1.svc"));
-            Console.WriteLine("{0}", client.GetData(new Random().Next()));
+            //ServiceReference1.CustomerServiceClient client =
+            //    new ServiceReference1.CustomerServiceClient(
+            //        new WebHttpBinding(), 
+            //        new EndpointAddress("http://localhost/WindsorWcfIntegration/Service1.svc"));
+            //Console.WriteLine("{0}", client.GetData(new Random().Next()));
 
             Console.ReadLine();
         }
@@ -44,7 +44,8 @@ namespace ClientApp
                 .AddFacility<WcfFacility>()
                 .Register(
                  Component.For<ILogger>().ImplementedBy<Log4netLogger>(),
-                Component.For<ICustomerService>().ImplementedBy<CustomerService>());
+                Component.For<ICustomerService>().ImplementedBy<CustomerService>()
+                .AsWcfClient(WcfEndpoint.BoundTo(new WebHttpBinding()).At("http://localhost/WindsorWcfIntegration/Service1.svc")));
                 //.Named("customerservice"));
             container.Register(Component.For<IDoSomethingWithCustomers>().ImplementedBy<DoSomethingWithCustomers>());
             return container;

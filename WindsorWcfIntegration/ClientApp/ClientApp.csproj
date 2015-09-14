@@ -78,11 +78,6 @@
     <Compile Include="IDoSomethingWithCustomers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -90,40 +85,16 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\WindsorWcfIntegration.CompositeType.datasource" />
-    <None Include="Service References\ServiceReference1\CustomerService.wsdl" />
-    <None Include="Service References\ServiceReference1\Service13.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\Service131.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\Service132.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{74b2d9ea-b4b2-4e59-be1e-0055b99a2a7b}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WindsorWcfIntegration\WindsorWcfIntegration.csproj">
       <Project>{3083ddcf-fac7-40b9-bd62-e10e355016e1}</Project>
       <Name>WindsorWcfIntegration</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
