@@ -5,17 +5,12 @@ using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.Log4netIntegration;
 using Castle.Windsor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using WindsorWcfIntegration;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace ClientApp
 {
-    
     class Program
     {
         static void Main(string[] args)
@@ -25,13 +20,6 @@ namespace ClientApp
             reverser.DoIt();
             reverser.DoIt();
             reverser.DoSomeMore();
-
-            //ServiceReference1.CustomerServiceClient client =
-            //    new ServiceReference1.CustomerServiceClient(
-            //        new WebHttpBinding(), 
-            //        new EndpointAddress("http://localhost/WindsorWcfIntegration/Service1.svc"));
-            //Console.WriteLine("{0}", client.GetData(new Random().Next()));
-
             Console.ReadLine();
         }
 
@@ -46,7 +34,7 @@ namespace ClientApp
                  Component.For<ILogger>().ImplementedBy<Log4netLogger>(),
                 Component.For<ICustomerService>().ImplementedBy<CustomerService>()
                 .AsWcfClient(WcfEndpoint.BoundTo(new WebHttpBinding()).At("http://localhost/WindsorWcfIntegration/Service1.svc")));
-                //.Named("customerservice"));
+            //.Named("customerservice"));
             container.Register(Component.For<IDoSomethingWithCustomers>().ImplementedBy<DoSomethingWithCustomers>());
             return container;
         }
@@ -72,7 +60,7 @@ namespace ClientApp
         public void DoSomeMore()
         {
             var compositeType = customerService.GetDataUsingDataContract(new CompositeType { StringValue = "my name is ", BoolValue = true });
-            Console.WriteLine("{0} {1}", compositeType.StringValue, compositeType.BoolValue );
-    }
+            Console.WriteLine("{0} {1}", compositeType.StringValue, compositeType.BoolValue);
+        }
     }
 }
