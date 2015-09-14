@@ -33,8 +33,10 @@ namespace ClientApp
                 .Register(
                  Component.For<ILogger>().ImplementedBy<Log4netLogger>(),
                 Component.For<ICustomerService>().ImplementedBy<CustomerService>()
-                .AsWcfClient(WcfEndpoint.BoundTo(new WebHttpBinding()).At("http://localhost/WindsorWcfIntegration/Service1.svc")));
-            //.Named("customerservice"));
+                .AsWcfClient(new RestClientModel("http://localhost/WindsorWcfIntegration/Service1.svc")));
+
+                                                     // .AsWcfClient(WcfEndpoint.BoundTo(new WebHttpBinding()).At("http://localhost/WindsorWcfIntegration/Service1.svc")));
+                                                      //.Named("customerservice"));
             container.Register(Component.For<IDoSomethingWithCustomers>().ImplementedBy<DoSomethingWithCustomers>());
             return container;
         }
